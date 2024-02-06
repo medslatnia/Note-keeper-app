@@ -2,18 +2,27 @@ import 'package:flutter/material.dart';
 
 class NoteDetail extends StatefulWidget{
 
+  String appBarTitle;
+  NoteDetail(this.appBarTitle);
+
   @override
   State<StatefulWidget> createState() {
-    return NoteDetailState();
+    return NoteDetailState(this.appBarTitle);
   }
 }
+
+
 
 class NoteDetailState extends State<NoteDetail>{
 
         static var _priorities = ['High', 'Low'];
 
+        String appBarTitle;
+
         TextEditingController titleController = TextEditingController();
         TextEditingController descriptionController = TextEditingController();
+
+        NoteDetailState(this.appBarTitle);
 
         @override
       Widget build(BuildContext context){
@@ -22,7 +31,10 @@ class NoteDetailState extends State<NoteDetail>{
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Note'),
+            title: Text(appBarTitle,style :TextStyle(color:Colors.white),),
+            backgroundColor: Colors.deepPurple,
+            iconTheme: IconThemeData(color: Colors.white),
+
           ),
           body:
           Padding(
@@ -85,7 +97,7 @@ class NoteDetailState extends State<NoteDetail>{
                       debugPrint('Something changed in Description Text Field');
                     },
                     decoration:InputDecoration(
-                        labelText: 'Title',
+                        labelText: 'Description',
                         labelStyle: textStyle,
                         border:OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0)
@@ -128,12 +140,12 @@ class NoteDetailState extends State<NoteDetail>{
                           onPrimary: Theme.of(context).primaryColorLight,
                         ),
                         child: Text(
-                          'Save',
+                          'Delete',
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
                           setState(() {
-                            debugPrint("Save button clicked");
+                            debugPrint("Delete button clicked");
                           });
                         },
                       ),
